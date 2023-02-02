@@ -1,0 +1,35 @@
+server:
+  port: 8055
+  name: MS Funcionario
+
+spring:
+  application:
+    name: ms-funcionario
+  data:
+    mongodb:
+      auto-index-creation: true
+      uri: mongodb://localhost:27017/funcionario-blood-testing?retryWrites=true&w=majority
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: admin
+    password: admin
+    virtual-host: local-vh
+  main:
+    allow-bean-definition-overriding: true
+
+springdoc:
+  swagger-ui:
+    path: /funcionario-api-docs.html
+  paths-to-match: /**/employee/**
+
+eldorado:
+  jwt:
+    secret: KaPdRgUkXp2s5v8y/B?E(H+MbQeThVmYq3t6w9z$C&F)J@NcRfUjXnZr4u7x!A%D
+    expirationMs: 300000
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+

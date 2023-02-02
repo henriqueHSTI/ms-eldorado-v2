@@ -1,0 +1,39 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: ms-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: user
+          uri: lb://ms-usuario
+          predicates:
+            - Path=/user/**
+            - Method=GET,POST,PUT
+
+        - id: employee
+          uri: lb://ms-funcionario
+          predicates:
+            - Path=/employee/**
+            - Method=GET,PUT,POST
+
+        - id: schedule
+          uri: lb://ms-schedule
+          predicates:
+            - Path=/schedule/**
+            - Method=GET,PUT,POST
+eureka:
+  client:
+    register-with-eureka: true
+    fecth-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+
+
+
+
+
+

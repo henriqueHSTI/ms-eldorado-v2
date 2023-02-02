@@ -1,0 +1,12 @@
+server:
+  port: 8761
+
+eureka:
+  instance: ms-eldorado-1
+  client:
+     register-with-eureka: false
+     fetch-registry: false
+spring:
+  application:
+    name: ms-discovery
+

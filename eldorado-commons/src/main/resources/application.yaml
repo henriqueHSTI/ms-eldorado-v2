@@ -1,0 +1,8 @@
+eldorado:
+  jwt:
+    secret: KaPdRgUkXp2s5v8y/B?E(H+MbQeThVmYq3t6w9z$C&F)J@NcRfUjXnZr4u7x!A%D
+    expirationMs: 1200000
+    authorizedPaths:
+      - "/users/create"
+      - "/users/login"
+

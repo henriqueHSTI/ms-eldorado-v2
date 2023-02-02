@@ -72,7 +72,6 @@ public class UserService {
         var user = userRepository.findByUserName(userLoginDto.getUserName())
                 .orElseThrow(() -> new NotFoundException("Invalid Access"));
         return modelMapper.map(user, UserDto.class);
-
     }
 
     public UserDto findById(@NotNull String document) {

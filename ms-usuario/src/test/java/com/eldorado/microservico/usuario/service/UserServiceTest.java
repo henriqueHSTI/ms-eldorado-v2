@@ -24,8 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class UserServiceTest {
@@ -51,8 +50,7 @@ class UserServiceTest {
     void createUserWithSucefully() {
         //arrange
         var user = UserMock.createValidUserDto();
-        Mockito.when(modelMapper.map(user, UserEntity.class)).thenReturn(UserEntity.builder().name(user.getName())
-                .birthDate(user.getBirthDate()).userName(user.getUserName()).build());
+        Mockito.when(modelMapper.map(user, UserEntity.class)).thenReturn(UserEntity.builder().name(user.getName()).birthDate(user.getBirthDate()).userName(user.getUserName()).build());
         Mockito.when(passwordEncoder.encode(any())).thenReturn("123456789");
 
         //action
@@ -90,6 +88,21 @@ class UserServiceTest {
 
         assertNotNull(result);
         verify(userRepository, times(1)).findByUserName(any());
+    }
+
+    @Test
+    void loginWithFailed() {
+
+        //arrange
+        var userLogin = UserMock.createValidUserLoginDto();
+        Mockito.when(userRepository.findByUserName(any())).thenThrow(NotFoundException.class);
+
+        //action
+        assertThrows(NotFoundException.class, () -> userService.login(userLogin));
+
+        //assertion
+        verify(userRepository, times(1)).findByUserName(any());
+        verifyNoInteractions(modelMapper);
     }
 
     @Test

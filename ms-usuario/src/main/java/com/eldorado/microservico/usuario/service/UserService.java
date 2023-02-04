@@ -76,7 +76,10 @@ public class UserService {
     }
 
     public UserDto findById(@NotNull String document) {
-        return modelMapper.map(userRepository.findById(document), UserDto.class);
+        log.info("Retrieve user to Id  {}", document);
+        var user = userRepository.findById(document).orElseThrow(() -> new NotFoundException(String.format("User {%s} Not Found", document)));
+
+        return modelMapper.map(user, UserDto.class);
     }
 
     private boolean vefifyEmail(String username) {

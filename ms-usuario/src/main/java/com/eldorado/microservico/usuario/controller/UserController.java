@@ -21,12 +21,12 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/create")
-    public ResponseEntity<?> createUser(@RequestBody UserDto userDto) {
+    public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto) {
         return new ResponseEntity<>(userService.createUser(userDto), HttpStatus.CREATED);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> getLogin(@RequestBody UserLoginDto loginDto) {
+    public ResponseEntity<UserDto> getLogin(@RequestBody UserLoginDto loginDto) {
         return ResponseEntity.ok(userService.login(loginDto));
     }
 

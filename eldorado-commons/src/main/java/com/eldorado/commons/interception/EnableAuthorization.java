@@ -1,7 +1,6 @@
 package com.eldorado.commons.interception;
 
 
-import com.eldorado.commons.exceptions.EldoradoExceptionHandler;
 import com.eldorado.commons.interception.header.HeaderInterceptor;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -30,8 +29,7 @@ import java.lang.annotation.Target;
         )
 })
 @Import({EnableAuthorization.Authorization.class,
-        HeaderInterceptor.class,
-        EldoradoExceptionHandler.class})
+        HeaderInterceptor.class})
 public @interface EnableAuthorization {
 
     @Slf4j

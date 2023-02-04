@@ -7,7 +7,7 @@ public class MongoDbContainer extends GenericContainer<MongoDbContainer> {
 
     public static final int MONGODB_PORT = 27017;
 
-    public static final String DEFAULT_IMAGE = "mongo";
+    public static final String DEFAULT_IMAGE = "mongo:latest";
 
     public MongoDbContainer() {
         this(DEFAULT_IMAGE);

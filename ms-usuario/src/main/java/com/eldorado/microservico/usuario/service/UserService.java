@@ -22,8 +22,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
+import java.util.regex.Pattern;
 
 
 @Service
@@ -31,6 +30,8 @@ import javax.mail.internet.InternetAddress;
 @RequiredArgsConstructor
 public class UserService {
     private static final String MESSAGE = "Cadastro realizado\nUsuario: %s\nSenha: %s";
+    public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
+            Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
     private static final String SUBJECT = "NÃO RESPONDA";
 
     private final ModelMapper modelMapper;
@@ -79,13 +80,20 @@ public class UserService {
     }
 
     private boolean vefifyEmail(String username) {
-        try {
-            InternetAddress emailAddr = new InternetAddress(username);
-            emailAddr.validate();
+
+        if (VALID_EMAIL_ADDRESS_REGEX.matcher(username).find())
             return true;
-        } catch (AddressException ex) {
-            log.error("Invalid email {} ", username);
-            throw new BadRequestException(String.format("Invalid email %s", username));
-        }
+
+        log.error("Invalid email {} ", username);
+        throw new BadRequestException(String.format("Invalid email %s", username));
+
+//        try {
+//            InternetAddress emailAddr = new InternetAddress(username);
+//            emailAddr.validate();
+//            return true;
+//        } catch (AddressException ex) {
+//            log.error("Invalid email {} ", username);
+//            throw new BadRequestException(String.format("Invalid email %s", username));
+//        }
     }
 }

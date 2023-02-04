@@ -4,3 +4,9 @@ eureka:
 spring:
   main:
     allow-bean-definition-overriding: true
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: admin
+    password: admin
+    virtual-host: local-vh

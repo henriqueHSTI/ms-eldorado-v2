@@ -15,10 +15,10 @@ management:
     web:
       exposure:
         include:
-         - health
-         - info
-         - beans
-         - env
+          - health
+          - info
+          - beans
+          - env
 
 spring:
   application:

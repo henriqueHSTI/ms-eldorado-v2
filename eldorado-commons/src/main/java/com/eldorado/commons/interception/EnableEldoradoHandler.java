@@ -2,7 +2,6 @@ package com.eldorado.commons.interception;
 
 
 import com.eldorado.commons.exceptions.EldoradoExceptionHandler;
-import com.eldorado.commons.interception.header.InterceptorConfiguration;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
@@ -18,7 +17,6 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 @Import({EnableEldoradoHandler.Authorization.class,
-        InterceptorConfiguration.class,
         EldoradoExceptionHandler.class})
 public @interface EnableEldoradoHandler {
 

@@ -2,6 +2,7 @@ package com.eldorado.microservico.usuario.controller;
 
 import com.eldorado.commons.dto.UserLoginDto;
 import com.eldorado.commons.exceptions.BadRequestException;
+import com.eldorado.commons.exceptions.NotFoundException;
 import com.eldorado.microservico.usuario.dto.UserDto;
 import com.eldorado.microservico.usuario.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -35,8 +36,14 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<UserDto> getLogin(@RequestBody UserLoginDto loginDto) {
-        return ResponseEntity.ok(userService.login(loginDto));
+    public ResponseEntity<?> getLogin(@RequestBody UserLoginDto loginDto) {
+        try {
+            return ResponseEntity.ok(userService.login(loginDto));
+        } catch (NotFoundException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping("/{document}")

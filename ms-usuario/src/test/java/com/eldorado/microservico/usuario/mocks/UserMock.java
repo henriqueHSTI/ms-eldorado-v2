@@ -16,8 +16,16 @@ public class UserMock {
     }
 
 
+    public static UserLoginDto createValidUserLoginDto(String username, String password) {
+        return UserLoginDto.builder().userName(username).password(password).build();
+    }
+
     public static UserLoginDto createValidUserLoginDto() {
-        return UserLoginDto.builder().userName("henrique@hsti.eng.br").password("123456").build();
+        return createValidUserLoginDto("henrique@hsti.eng.br", "123456");
+    }
+
+    public static UserLoginDto createValidGetUserLoginDto() {
+        return createValidUserLoginDto("mijwn2@gmail.com", "123456");
     }
 
 }

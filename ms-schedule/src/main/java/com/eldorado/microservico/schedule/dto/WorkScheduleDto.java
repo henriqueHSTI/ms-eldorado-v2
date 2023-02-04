@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
@@ -20,7 +21,7 @@ public class WorkScheduleDto {
     @NotNull
     private UUID employeeId;
 
-    private WeekEnum dayOfWeek;
+    private DayOfWeek dayOfWeek;
 
     private List<String> workTimes = ScheduleHelper.WORK_TIMES;
 

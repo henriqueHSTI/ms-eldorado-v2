@@ -1,7 +1,6 @@
 package com.eldorado.microservico.schedule.domain.model;
 
 
-import com.eldorado.microservico.schedule.dto.WeekEnum;
 import com.mongodb.lang.NonNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,6 +10,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -23,11 +23,8 @@ import java.util.UUID;
 public class AppointmentEntity {
     @Id
     private UUID id;
-    @Indexed
     @NonNull
-    private UUID employeeId;
-    @NonNull
-    private WeekEnum dayOfWeek;
+    private DayOfWeek dayOfWeek;
     @NonNull
     private String workTime;
     @NonNull
@@ -37,6 +34,7 @@ public class AppointmentEntity {
 
     private UserEntity user;
 
+    @Indexed
     private EmployeeEntity employee;
 
 

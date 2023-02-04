@@ -1,7 +1,6 @@
 package com.eldorado.microservico.schedule;
 
 import com.eldorado.commons.configuration.EnableMapper;
-import com.eldorado.commons.interception.EnableAuthorization;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

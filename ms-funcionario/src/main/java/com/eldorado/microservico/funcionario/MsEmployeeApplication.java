@@ -1,6 +1,7 @@
 package com.eldorado.microservico.funcionario;
 
 import com.eldorado.commons.configuration.EnableMapper;
+import com.eldorado.commons.interception.EnableAuthorization;
 import com.eldorado.commons.interception.EnableEldoradoHandler;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.boot.SpringApplication;
@@ -10,6 +11,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @SpringBootApplication
 @EnableMongoRepositories
 @EnableEldoradoHandler
+@EnableAuthorization
 @EnableRabbit
 @EnableMapper
 public class MsEmployeeApplication {

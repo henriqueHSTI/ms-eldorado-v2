@@ -1,5 +1,4 @@
 server:
-  port: 8045
   name: MS Schedule
 
 springdoc:
@@ -13,9 +12,9 @@ spring:
   data:
     mongodb:
       auto-index-creation: true
-      uri: mongodb://localhost:27017/schedule-blood-testing?retryWrites=true&w=majority
+      uri: mongodb://${MONGODB_CONNECTION_STRING:localhost}:27017/schedule-blood-testing?retryWrites=true&w=majority
   rabbitmq:
-    host: localhost
+    host: ${rabbit_host:localhost}
     port: 5672
     username: admin
     password: admin
@@ -32,4 +31,4 @@ eldorado:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: http://${discovery_host:localhost}:8761/eureka

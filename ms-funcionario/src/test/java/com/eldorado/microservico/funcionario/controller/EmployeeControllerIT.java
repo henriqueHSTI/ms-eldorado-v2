@@ -66,7 +66,7 @@ public class EmployeeControllerIT {
 
     @Test
     @SneakyThrows
-    void createUserAndPersistResult() {
+    void createEmployeeAndPersistResult() {
         var employee = EmployeeDto.builder().name("Matheus Wiener").email("matheusowo1@gmail.com").build();
 
         log.info(objectMapper.writeValueAsString(employee));
@@ -82,7 +82,7 @@ public class EmployeeControllerIT {
 
     @Test
     @SneakyThrows
-    void getUserLoginWithSuccess() {
+    void getAllEmployeesWithSuccess() {
 
         var entity = EmployeeEntity.builder()
                 .id(UUID.randomUUID())
@@ -111,7 +111,7 @@ public class EmployeeControllerIT {
 
     @Test
     @SneakyThrows
-    void getUserLoginByIdWithSuccess() {
+    void getEmployeeByIdWithSuccess() {
 
         UUID employeeId = UUID.randomUUID();
 

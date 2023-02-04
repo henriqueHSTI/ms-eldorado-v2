@@ -17,13 +17,13 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-@Import({EnableEldoradoHandler.Authorization.class,
+@Import({EnableEldoradoHandler.EldoradoExceptionHandler.class,
         InterceptorConfiguration.class,
         EldoradoExceptionHandler.class})
 public @interface EnableEldoradoHandler {
 
     @Slf4j
-    class Authorization implements BeanFactoryPostProcessor {
+    class EldoradoExceptionHandler implements BeanFactoryPostProcessor {
         @Override
         public void postProcessBeanFactory(final @NonNull ConfigurableListableBeanFactory configurableListableBeanFactory)
                 throws BeansException {

@@ -87,13 +87,5 @@ public class UserService {
         log.error("Invalid email {} ", username);
         throw new BadRequestException(String.format("Invalid email %s", username));
 
-//        try {
-//            InternetAddress emailAddr = new InternetAddress(username);
-//            emailAddr.validate();
-//            return true;
-//        } catch (AddressException ex) {
-//            log.error("Invalid email {} ", username);
-//            throw new BadRequestException(String.format("Invalid email %s", username));
-//        }
     }
 }

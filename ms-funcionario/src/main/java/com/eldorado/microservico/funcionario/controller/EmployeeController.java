@@ -4,6 +4,7 @@ import com.eldorado.microservico.funcionario.dto.EmployeeDto;
 import com.eldorado.microservico.funcionario.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,17 +19,15 @@ public class EmployeeController {
 
     private final EmployeeService employeeService;
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<EmployeeDto> createEmployee(@RequestBody EmployeeDto employeeDto) {
         log.info("Saving employee {}", employeeDto);
-
-        return ResponseEntity.ok(employeeService.createEmployee(employeeDto));
+        return new ResponseEntity<>(employeeService.createEmployee(employeeDto), HttpStatus.CREATED);
     }
 
     @GetMapping("/all")
     public ResponseEntity<List<EmployeeDto>> retrieveAllEmployees() {
         log.info("Retrieving all employees");
-
         return ResponseEntity.ok(employeeService.retriveAllEmployees());
     }
 

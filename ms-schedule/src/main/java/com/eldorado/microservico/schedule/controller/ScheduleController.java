@@ -7,6 +7,7 @@ import com.eldorado.microservico.schedule.service.ScheduleService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,9 +24,12 @@ public class ScheduleController {
     private final ScheduleService scheduleService;
 
     @PostMapping("/work-schedule")
-    public void saveWorkSchedule(@RequestBody List<WorkScheduleDto> workScheduleDto) {
+    public ResponseEntity<?> saveWorkSchedule(@RequestBody List<WorkScheduleDto> workScheduleDto) {
         log.info("Save work Schedule to employee");
+
         scheduleService.saveWorkSchedule(workScheduleDto);
+
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/work-schedule/{employeeId}/{workDate}")
@@ -37,6 +41,6 @@ public class ScheduleController {
     @PostMapping("/appointment")
     public ResponseEntity<AppointmentDto> saveAppoitment(@RequestBody @Valid AppointmentDto appointmentDto) {
         log.info("Save a appoitment");
-        return ResponseEntity.ok(scheduleService.saveAppointment(appointmentDto));
+        return new ResponseEntity<>(scheduleService.saveAppointment(appointmentDto), HttpStatus.CREATED);
     }
 }

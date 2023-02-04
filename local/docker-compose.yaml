@@ -9,25 +9,121 @@ services:
     volumes:
       - ./data/db:/data/db
     ports:
-      - 27017:27017
+      - "27017:27017"
     command: mongod --logpath=/dev/null
 
   rabbitmq:
     image: rabbitmq:management
     ports:
-      - 5672:5672
-      - 15672:15672
+      - "5672:5672"
+      - "15672:15672"
     environment:
       RABBITMQ_DEFAULT_USER: admin
       RABBITMQ_DEFAULT_PASS: admin
       RABBITMQ_DEFAULT_VHOST: local-vh
 
-  eldorado-tech-service:
-    build: ../
-    container_name: eldorado-service-v1
+  discovery:
+    build: ../ms-discovery
+    container_name: eldorado-discovery
     ports:
-      - 8080:8080
+      - "8761:8761"
+
+  gateway:
+    build: ../ms-gateway
+    container_name: eldorado-gateway
+    ports:
+      - "8080:8080"
+    environment:
+      - discovery_host=discovery
+
+  autenticacao:
+    build: ../ms-autenticacao
+    container_name: eldorado-autenticacao
+    ports:
+      - "8081:8080"
+    environment:
+      - discovery_host=discovery
+
+  autenticacao_replica:
+    build: ../ms-autenticacao
+    container_name: eldorado-autenticacao-r1
+    ports:
+      - "8082:8080"
+    environment:
+      - discovery_host=discovery
+
+  funcionario:
+    build: ../ms-funcionario
+    container_name: eldorado-funcionario
+    ports:
+      - "8083:8080"
+    environment:
+      - MONGODB_CONNECTION_STRING=mongo
+      - discovery_host=discovery
+      - rabbit_host=rabbitmq
+
+  funcionario_reoplica:
+    build: ../ms-funcionario
+    container_name: eldorado-funcionario_r1
+    ports:
+      - "8084:8080"
+    environment:
+      - MONGODB_CONNECTION_STRING=mongo
+      - discovery_host=discovery
+      - rabbit_host=rabbitmq
+
+  notificacao:
+    build: ../ms-notificacao
+    container_name: eldorado-notificacao
+    ports:
+      - "8085:8080"
+    environment:
+      - rabbit_host=rabbitmq
+      - discovery_host=discovery
+
+  notificacao_replica:
+    build: ../ms-notificacao
+    container_name: eldorado-notificacao-r1
+    ports:
+      - "8086:8080"
     environment:
       - SPRING_PROFILES_ACTIVE=docker
-      - MONGODB_CONNECTION_STRING=mongodb://mongo:27017/
+      - rabbit_host=rabbitmq
+      - discovery_host=discovery
+
+  schedule:
+    build: ../ms-schedule
+    container_name: eldorado-schedule
+    ports:
+      - "8087:8080"
+    environment:
+      - MONGODB_CONNECTION_STRING=mongo
+      - discovery_host=discovery
+
+  schedule_replica:
+    build: ../ms-schedule
+    container_name: eldorado-schedule-r1
+    ports:
+      - "8088:8080"
+    environment:
+      - MONGODB_CONNECTION_STRING=mongo
+      - discovery_host=discovery
+
+  usuario:
+    build: ../ms-usuario
+    container_name: eldorado-usuario
+    ports:
+      - "8089:8080"
+    environment:
+      - MONGODB_CONNECTION_STRING=mongo
+      - discovery_host=discovery
+
+  usuario_replica:
+    build: ../ms-usuario
+    container_name: eldorado-usuario-r1
+    ports:
+      - "8090:8080"
+    environment:
+      - MONGODB_CONNECTION_STRING=mongo
+      - discovery_host=discovery
 

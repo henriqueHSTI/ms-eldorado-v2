@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/eldorado/auth")
+@RequestMapping("/auth")
 @Slf4j
 @RequiredArgsConstructor
 public class AuthenticatorController {

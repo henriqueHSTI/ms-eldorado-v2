@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.eldorado</groupId>
     <artifactId>eldorado-commons</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2-SNAPSHOT</version>
     <name>eldorado-commons</name>
     <description>Implementação comum do projeto Eldorado</description>
     <properties>
@@ -88,7 +88,7 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.13.3</version>
+            <version>2.13.4.1</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jsr310 -->

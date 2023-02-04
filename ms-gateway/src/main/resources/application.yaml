@@ -24,12 +24,18 @@ spring:
           predicates:
             - Path=/schedule/**
             - Method=GET,PUT,POST
+
+        - id: auth
+          uri: lb://ms-autorizacao
+          predicates:
+            - Path=/auth/**
+            - Method=POST
 eureka:
   client:
     register-with-eureka: true
     fecth-registry: true
     service-url:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: http://${discovery_host:localhost}:8761/eureka
 
 
 

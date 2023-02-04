@@ -1,7 +1,6 @@
 package com.eldorado.microservico.usuario.controller;
 
 import com.eldorado.commons.dto.UserLoginDto;
-import com.eldorado.commons.exceptions.BadRequestException;
 import com.eldorado.microservico.usuario.dto.UserDto;
 import com.eldorado.microservico.usuario.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -23,15 +22,7 @@ public class UserController {
 
     @PostMapping("/create")
     public ResponseEntity<?> createUser(@RequestBody UserDto userDto) {
-
-        try {
-            return new ResponseEntity<>(userService.createUser(userDto), HttpStatus.CREATED);
-        } catch (BadRequestException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-        } catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
+        return new ResponseEntity<>(userService.createUser(userDto), HttpStatus.CREATED);
     }
 
     @PostMapping("/login")

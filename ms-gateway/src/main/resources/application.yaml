@@ -24,6 +24,12 @@ spring:
           predicates:
             - Path=/schedule/**
             - Method=GET,PUT,POST
+
+        - id: auth
+          uri: lb://ms-autorizacao
+          predicates:
+            - Path=/auth/**
+            - Method=POST
 eureka:
   client:
     register-with-eureka: true

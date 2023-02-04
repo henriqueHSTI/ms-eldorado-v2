@@ -51,18 +51,4 @@ public class EldoradoExceptionHandler extends ResponseEntityExceptionHandler {
 
         return new ResponseEntity<>(customErrorResponse, HttpStatus.UNAUTHORIZED);
     }
-
-    @ExceptionHandler(NicolayException.class)
-    public ResponseEntity<Object> handleNicolayExceptionInternal(NicolayException ex,
-                                                                 WebRequest request) {
-        CustomErrorResponse customErrorResponse =
-                CustomErrorResponse.builder()
-                        .status(HttpStatus.PRECONDITION_FAILED)
-                        .message(ex.getLocalizedMessage())
-                        .errors(List.of(ex.getLocalizedMessage()))
-                        .build();
-
-        return new ResponseEntity<>(customErrorResponse, HttpStatus.PRECONDITION_FAILED);
-    }
-
 }

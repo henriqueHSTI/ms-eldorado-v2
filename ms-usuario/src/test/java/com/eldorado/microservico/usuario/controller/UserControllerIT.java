@@ -79,10 +79,10 @@ class UserControllerIT {
         var response = mockMvc.perform(post("/user/create")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(user)))
-                .andExpect(status().is(200));
+                .andExpect(status().is(201));
 
         Assertions.assertEquals(1, userRepository.findAll().size());
-        Assertions.assertEquals(200, response.andReturn().getResponse().getStatus());
+        Assertions.assertEquals(201, response.andReturn().getResponse().getStatus());
     }
 
     @Test

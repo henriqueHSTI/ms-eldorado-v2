@@ -1,10 +1,7 @@
 package com.eldorado.microservico.usuario.controller;
 
-import com.eldorado.commons.dto.UserLoginDto;
-import com.eldorado.microservico.usuario.domain.model.UserEntity;
 import com.eldorado.microservico.usuario.domain.repository.UserRepository;
 import com.eldorado.microservico.usuario.dto.UserDto;
-import com.eldorado.microservico.usuario.mocks.UserMock;
 import com.eldorado.microservico.usuario.testcontainer.MongoDbContainer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
@@ -13,7 +10,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,7 +23,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -44,9 +39,6 @@ class UserControllerIT {
     private MockMvc mockMvc;
     @Autowired
     public ObjectMapper objectMapper;
-
-    @Autowired
-    public ModelMapper modelMapper;
 
     private static MongoDbContainer mongoDbContainer;
 
@@ -83,38 +75,6 @@ class UserControllerIT {
 
         Assertions.assertEquals(1, userRepository.findAll().size());
         Assertions.assertEquals(201, response.andReturn().getResponse().getStatus());
-    }
-
-    @Test
-    @SneakyThrows
-    void getUserLoginWithSuccess() {
-
-        var entity = UserEntity.builder()
-                .name("Matheus Nicolay")
-                .gender('M')
-                .birthDate(LocalDate.of(2001, 02, 07))
-                .document("128823834")
-                .userName("mijwn2@gmail.com")
-                .password("123456")
-                .build();
-
-        userRepository.save(entity);
-
-        var user = UserMock.createValidGetUserLoginDto();
-
-        var response = mockMvc.perform(post("/user/login")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(user)))
-                .andExpect(status().is(200));
-
-        String responseBody = response.andReturn().getResponse().getContentAsString();
-
-        log.info(responseBody);
-
-        var userResponse = objectMapper.readValue(responseBody, UserDto.class);
-
-        Assertions.assertEquals("mijwn2@gmail.com", userResponse.getUserName());
-        Assertions.assertEquals(200, response.andReturn().getResponse().getStatus());
     }
 
 

@@ -108,10 +108,6 @@ public class UserStepsDefinitions {
     }
 
 
-
-
-
-
     @Given("O username eh {string}")
     public void o_username_eh(String username) {
         userDto.setUserName(username);

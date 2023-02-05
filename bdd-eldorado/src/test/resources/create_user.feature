@@ -15,16 +15,15 @@ Feature: Criação de Usuario
 
   Scenario: Busca de Usuario no sistema com sucesso
     Given Eu vou criar um payload de usuario
-    And O username eh 'matyyeh@gmail.com'
+    And O username eh 'meuEmail@gmail.com'
     When Eu envio o payload para o sistema
-    And Eu vou fazer uma requisição com username 'matyyeh@gmail.com'
+    And Eu vou fazer uma requisição com username 'meuEmail@gmail.com'
     Then Eu recebo um payload de login
     And meu statusCode eh 200
     And o payload contem o campo password e username nao eh nulo
 
-
   Scenario: Busca de Usuario no sistema com falha
     Given Eu vou criar um payload de usuario
     When Eu envio o payload para o sistema
-    And Eu vou fazer uma requisição com username 'palmeirasnaotemmundial@gmail.com' invalido
+    And Eu vou fazer uma requisição com username 'meuEmail@gmail.com' invalido
     And meu statusCode error eh 404

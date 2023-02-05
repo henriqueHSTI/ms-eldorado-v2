@@ -37,8 +37,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @Slf4j
 @AutoConfigureMockMvc
-@ContextConfiguration(initializers = UserControllerIT.MongoDbInitializer.class)
-class UserControllerIT {
+@ContextConfiguration(initializers = UserControllerTest.MongoDbInitializer.class)
+class UserControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
